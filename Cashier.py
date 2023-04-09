@@ -1,13 +1,9 @@
 
 import sqlalchemy as db
 from sqlalchemy.orm import sessionmaker
-
-import uuid
 import tabulate
 
 # base class
-
-
 class Transaction:
 
     # class attribute
@@ -26,7 +22,8 @@ class Transaction:
     def add_item(self, items):
         try:
             if not any(item['name'] == items[0] for item in self.cart):
-                self.cart.append({'name': items[0], 'amount': items[1],'price': items[2], 'total_price': items[1]*items[2]})
+                self.cart.append(
+                    {'name': items[0], 'amount': items[1], 'price': items[2], 'total_price': items[1]*items[2]})
             else:
                 raise Exception('Add new item instead or update your item')
         except Exception as e:
@@ -39,7 +36,7 @@ class Transaction:
             update['name'] = updated_name
         except:
             print("Item name is not found")
-        
+
     # call this function to update item amount
     def update_item_qty(self, name, updated_amount):
         try:
@@ -69,8 +66,8 @@ class Transaction:
         except NameError as e:
             print(e)
 
-
     # call this function to reset cart
+
     def reset_transaction(self):
         self.name = ""
         self.amount = 0
@@ -80,7 +77,7 @@ class Transaction:
 
     # call this function to check order in cart
     def check_order(self):
-        try:    
+        try:
             dataset = self.cart
             header = dataset[0].keys()
             rows = [x.values() for x in dataset]
@@ -91,18 +88,18 @@ class Transaction:
     # call this function to checkout all item in cart
     def check_out(self):
         try:
-            total=0
-            total_without_discount=0
+            total = 0
+            total_without_discount = 0
             for item in self.cart:
-                total_without_discount+=item['total_price']
-                if (item['total_price']>500000):
-                    total+=item['total_price']*0.93
-                elif (item['total_price']>300000):
-                    total+=item['total_price']*0.94
-                elif (item['total_price']>200000):
-                    total+=item['total_price']*0.95
+                total_without_discount += item['total_price']
+                if (item['total_price'] > 500000):
+                    total += item['total_price']*0.93
+                elif (item['total_price'] > 300000):
+                    total += item['total_price']*0.94
+                elif (item['total_price'] > 200000):
+                    total += item['total_price']*0.95
                 else:
-                    total+=item['total_price']
+                    total += item['total_price']
             if self.cart:
                 self.insert_to_table()
             else:
@@ -113,24 +110,25 @@ class Transaction:
             print(f'total : {total_without_discount}')
             print(f'total after discount : {total}')
 
-
     # call this function to insert transaction into SQLite table
+
     def insert_to_table(self):
-        engine = db.create_engine('sqlite:///supercashier.db',echo=True)
+        engine = db.create_engine('sqlite:///supercashier.db', echo=True)
         # conn = engine.connect()
-        metadata= db.MetaData()
-        transactions_table=db.Table('transactions',metadata,
-                                    db.Column('id',db.Integer,primary_key=True,autoincrement=True),
-                                    db.Column('name',db.String),
-                                    db.Column('amount',db.Integer),
-                                    db.Column('price',db.Integer),
-                                    db.Column('total_price',db.Integer),
-                                    )
+        metadata = db.MetaData()
+        transactions_table = db.Table('transactions', metadata,
+                                      db.Column(
+                                          'id', db.Integer, primary_key=True, autoincrement=True),
+                                      db.Column('name', db.String),
+                                      db.Column('amount', db.Integer),
+                                      db.Column('price', db.Integer),
+                                      db.Column('total_price', db.Integer),
+                                      )
         metadata.create_all(engine)
-        
+
         Session = sessionmaker(bind=engine)
         session = Session()
-       
+
         for item in self.cart:
             row = transactions_table.insert().values(**item)
             session.execute(row)
