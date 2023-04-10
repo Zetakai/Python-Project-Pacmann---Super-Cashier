@@ -18,7 +18,7 @@ class Transaction:
     # call this function to add item into cart
     def add_item(self, items):
         try:
-            if not any(item['name'] == items[0] for item in self.__cart):
+            if not any(item['name'].lower() == items[0].lower() for item in self.__cart):
                 self.__cart.append(
                     {'name': items[0],'transaction_id':self.__transaction_id ,'amount': items[1], 'price': items[2], 'total_price': items[1]*items[2]})
             else:
@@ -29,7 +29,7 @@ class Transaction:
     # call this function to update item name
     def update_item_name(self, name, updated_name):
         try:
-            update = next(item for item in self.__cart if item['name'] == name)
+            update = next(item for item in self.__cart if item['name'].lower() == name.lower())
             update['name'] = updated_name
         except:
             print("Item name is not found")
@@ -37,7 +37,7 @@ class Transaction:
     # call this function to update item amount
     def update_item_qty(self, name, updated_amount):
         try:
-            update = next(item for item in self.__cart if item['name'] == name)
+            update = next(item for item in self.__cart if item['name'].lower() == name.lower())
             update['amount'] = updated_amount
             update['total_price'] = update['amount']*update['price']
         except:
@@ -46,7 +46,7 @@ class Transaction:
     # call this function to update item price
     def update_item_price(self, name, updated_price):
         try:
-            update = next(item for item in self.__cart if item['name'] == name)
+            update = next(item for item in self.__cart if item['name'].lower() == name.lower())
             update['price'] = updated_price
             update['total_price'] = update['amount']*update['price']
         except:
@@ -55,7 +55,7 @@ class Transaction:
     # call this function to delete item
     def delete_item(self, name):
         try:
-            if not any(item['name'] == name for item in self.__cart):
+            if not any(item['name'].lower() == name.lower() for item in self.__cart):
                 raise NameError("Item name is not found")
             else:
                 res = list(filter(lambda i: i['name'] != name, self.__cart))

@@ -56,20 +56,24 @@ def start_program():
             name = input("Item name:")
             updated_name = input("Change item name to:")
             transaction.update_item_name(name, updated_name)
+            transaction.check_order()
             main_menu()
         elif(choice == '3'):
             name = input("Item name:")
             amount = inputInt("Change item amount to:")
             transaction.update_item_qty(name, amount)
+            transaction.check_order()
             main_menu()
         elif(choice == '4'):
             name = input("Item name:")
             price = inputInt("Change item price to:")
             transaction.update_item_price(name, price)
+            transaction.check_order()
             main_menu()
         elif(choice == '5'):
             name = input("Item name:")
             transaction.delete_item(name)
+            transaction.check_order()
             main_menu()
         elif(choice == '6'):
             transaction.reset_transaction()
