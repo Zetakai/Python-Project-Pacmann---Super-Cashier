@@ -95,16 +95,16 @@ class Transaction:
                     total += item['total_price']
             if self.__cart:
                 self.insert_to_table()
-                self.reset_transaction()
             else:
                 raise ValueError("Your order list is empty")
         except ValueError as e:
             print(e)
         finally:
-
+            self.check_order()
             print(f'Succesfully checked out')
             print(f'total : {total_without_discount}')
             print(f'total after discount : {total}')
+            self.reset_transaction()
 
     # call this function to insert transaction into SQLite table
     def insert_to_table(self):
