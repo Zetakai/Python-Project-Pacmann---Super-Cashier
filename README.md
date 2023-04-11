@@ -104,4 +104,4 @@ Insert to table function
 
 # CONCLUSION
 
-I believe this python program will worked as intended and with comments and suggestion it will improve far better.
+Though this project still has much room for improvements, I believe this project has passed minimum requirement and works as the program is intended to do. Thanks
