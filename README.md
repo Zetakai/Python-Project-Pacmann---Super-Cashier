@@ -60,7 +60,7 @@ Reset the transaction list and start anew
 
 ### 10. Check Order
 ![Check Order](img/functions/check_order.png)
-Check the transaction list in form of table using pretty table library, consist of item name, item quantity, item price and price total of item
+Check the transaction list in form of table using tabulate library, consist of item name, item quantity, item price and price total of item
 
 ### 11. Check out
 ![Check Order](img/functions/check_out.png)
