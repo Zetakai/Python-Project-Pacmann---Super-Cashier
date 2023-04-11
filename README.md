@@ -22,48 +22,47 @@ Super Cashier is a quick shopping support tool, helping to automatically list th
 ### 1. Libraries
 ![libraries](img/functions/libraries.png)
 
-Create class transaction with atribute self.cart to put the items in list
 ### 2. Class Transaction
 ![Transaction](https://github.com/nuralamsaputra/Cashier-Project/blob/master/img/02.%20class%20Transaction.png)
+Create class transaction with atribute self.cart to put the items in list
 
-Add item with parameters item name, item quantity and item price in dictionary per item and append the next item into the list
 ### 3. Add Item
 ![Add Item](img/functions/add_item.png)
+Add item with parameters item name, item quantity and item price in dictionary per item and append the next item into the list
 
-Change certain item name in the list, with found list as the filtered item 
 ### 4. Update Item Name
 ![Update Item Name](img/functions/update_name.png)
+Change certain item name in the list, with found list as the filtered item 
 
-Change certain item quantity in the list, with found list as the filtered item
 ### 5. Update Item Quantity
 ![Update Item Quantity](img/functions/update_amount.png)
+Change certain item quantity in the list, with found list as the filtered item
 
-Change certain item price in the list, with found list as the filtered item
 ### 6. Update Item Price
 ![Update Item Price](img/functions/update_price.png)
+Change certain item price in the list, with found list as the filtered item
 
-Delete certain item in the list, with found list as the filterd item
 ### 7. Delete Item
 ![Delete Item](img/functions/delete_item.png)
+Delete certain item in the list, with found list as the filterd item
 
-Reset the transaction list and start anew
 ### 9. Reset Transaction
 ![Reset Transaction](img/functions/reset_transaction.png)
+Reset the transaction list and start anew
 
-Check the transaction list in form of table using pretty table library, consist of item name, item quantity, item price and price total of item
 ### 10. Check Order
 ![Check Order](img/functions/check_order.png)
+Check the transaction list in form of table using pretty table library, consist of item name, item quantity, item price and price total of item
 
-Check out items from cart and export the data to database
 ### 11. Check out
 ![Check Order](img/functions/check_out.png)
+Check out items from cart and export the data to database
 
-Insert to table function
 ### 11. Insert to table
 ![Insert to table](img/functions/insert_to_table.png)
+Insert to table function
 
 
-Show how much amount customer need to pay, if certain amount is achieved customers will get discount.
 # HOW TO USE 
 
 ### 1. Download or Clone this project
