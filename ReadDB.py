@@ -1,4 +1,5 @@
-from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, select,exc
+from sqlalchemy import create_engine, Table, Column, Integer, String, MetaData, select, exc, Float
+
 
 def read_db():
     # create a database engine
@@ -7,14 +8,16 @@ def read_db():
 
         # define metadata for table
         metadata = MetaData()
-        transactions_table=Table('transactions',metadata,
-                                            Column('id',Integer,primary_key=True),
-                                            Column('transaction_id',String),
-                                            Column('name',String),
-                                            Column('amount',Integer),
-                                            Column('price',Integer),
-                                            Column('total_price',Integer),
-                                            )
+        transactions_table = Table('transactions', metadata,
+                                   Column('id', Integer, primary_key=True),
+                                   Column('transaction_id', String),
+                                   Column('name', String),
+                                   Column('amount', Integer),
+                                   Column('price', Integer),
+                                   Column('total_price', Integer),
+                                   Column('discount', String),
+                                   Column('total_price_after_discount', Float),
+                                   )
 
         # bind table to engine
         transactions_table.bind = engine

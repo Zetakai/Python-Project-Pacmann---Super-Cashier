@@ -15,12 +15,28 @@ class Transaction:
     def __init__(self):
         self.__transaction_id = str(uuid.uuid4())
 
+    def __check_discount(self,amount,price):
+        if (amount*price > 500000):
+            discount='7%'
+            total_price_after_discount = amount*price*0.93
+        elif (amount*price > 300000):
+            discount='6%'
+            total_price_after_discount = amount*price*0.94
+        elif (amount*price > 200000):
+            discount='5%'
+            total_price_after_discount = amount*price*0.95
+        else:
+            discount='0%'
+            total_price_after_discount = amount*price
+        return [discount,total_price_after_discount]
+
     # call this function to add item into cart
     def add_item(self, items):
         try:
             if not any(item['name'].lower() == items[0].lower() for item in self.__cart):
+                discount_n_total=self.__check_discount(items[1],items[2])
                 self.__cart.append(
-                    {'name': items[0],'transaction_id':self.__transaction_id ,'amount': items[1], 'price': items[2], 'total_price': items[1]*items[2]})
+                    {'name': items[0],'transaction_id':self.__transaction_id ,'amount': items[1], 'price': items[2], 'total_price': items[1]*items[2],'discount':discount_n_total[0],'total_price_after_discount':discount_n_total[1]})
             else:
                 raise Exception('Add new item instead or update your item')
         except Exception as e:
@@ -40,6 +56,9 @@ class Transaction:
             update = next(item for item in self.__cart if item['name'].lower() == name.lower())
             update['amount'] = updated_amount
             update['total_price'] = update['amount']*update['price']
+            discount_n_total = self.__check_discount(updated_amount,update['price'])
+            update['discount'] = discount_n_total[0]
+            update['total_price_after_discount'] = discount_n_total[1]
         except:
             print("Item name is not found")
 
@@ -49,6 +68,9 @@ class Transaction:
             update = next(item for item in self.__cart if item['name'].lower() == name.lower())
             update['price'] = updated_price
             update['total_price'] = update['amount']*update['price']
+            discount_n_total = self.__check_discount(update['amount'],updated_price)
+            update['discount'] = discount_n_total[0]
+            update['total_price_after_discount'] = discount_n_total[1]
         except:
             print("Item name is not found")
 
@@ -81,18 +103,11 @@ class Transaction:
     # call this function to checkout all item in cart
     def check_out(self):
         try:
-            total = 0
-            total_without_discount = 0
+            total_price = 0
+            total_price_after_discount = 0
             for item in self.__cart:
-                total_without_discount += item['total_price']
-                if (item['total_price'] > 500000):
-                    total += item['total_price']*0.93
-                elif (item['total_price'] > 300000):
-                    total += item['total_price']*0.94
-                elif (item['total_price'] > 200000):
-                    total += item['total_price']*0.95
-                else:
-                    total += item['total_price']
+                total_price+=item["total_price"]
+                total_price_after_discount+=item["total_price_after_discount"]
             if self.__cart:
                 self.insert_to_table()
             else:
@@ -102,8 +117,8 @@ class Transaction:
         finally:
             self.check_order()
             print(f'Succesfully checked out')
-            print(f'total : {total_without_discount}')
-            print(f'total after discount : {total}')
+            print(f'total : {total_price}')
+            print(f'total after discount : {total_price_after_discount}')
             self.reset_transaction()
 
     # call this function to insert transaction into SQLite table
@@ -120,6 +135,8 @@ class Transaction:
                                       db.Column('amount', db.Integer),
                                       db.Column('price', db.Integer),
                                       db.Column('total_price', db.Integer),
+                                      db.Column('discount', db.String),
+                                      db.Column('total_price_after_discount', db.Float),
                                       )
         metadata.create_all(engine)
 
