@@ -1,4 +1,3 @@
-
 import sqlalchemy as db
 from sqlalchemy.orm import sessionmaker
 import tabulate
