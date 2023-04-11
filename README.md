@@ -31,7 +31,7 @@ Super Cashier is a quick shopping support tool, helping to automatically list th
 ![libraries](img/functions/libraries.png)
 
 ### 2. Class Transaction
-![Transaction](https://github.com/nuralamsaputra/Cashier-Project/blob/master/img/02.%20class%20Transaction.png)
+![Transaction](img/functions/Class.png)
 Create class transaction with atribute self.cart to put the items in list
 
 ### 3. Add Item
