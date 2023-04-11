@@ -14,12 +14,20 @@ Super Cashier is a quick shopping support tool, helping to automatically list th
 7. Customers get the "error message" when there's error on the input
 8. Transaction then exported to sqlite
 
-<!---# FLOWCHART
-![Flowchart](https://github.com/nuralamsaputra/Cashier-Project/blob/master/img/flowchart%20super%20cashier.drawio.png)--->
+# FLOWCHART
+![Flowchart](img/flowchart.png)
+1. Start Program
+2. Program create transaction_id
+3. Input Task
+4. Options and showing order list
+5. Customer adding, updating or delete items
+6. Customer resets transaction
+7. Customer checks out items 
+8. Transaction recorded into database SQLite
 
 # MODULES EXPLANATION
 
-### 1. Libraries
+### 1. Libraries and Requirements
 ![libraries](img/functions/libraries.png)
 
 ### 2. Class Transaction
