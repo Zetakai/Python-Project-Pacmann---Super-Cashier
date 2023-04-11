@@ -80,7 +80,7 @@ class Transaction:
             if not any(item['name'].lower() == name.lower() for item in self.__cart):
                 raise NameError("Item name is not found")
             else:
-                res = list(filter(lambda i: i['name'] != name, self.__cart))
+                res = list(filter(lambda i: i['name'].lower() != name.lower(), self.__cart))
                 self.__cart = res
         except NameError as e:
             print(e)
